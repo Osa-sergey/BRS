@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">BRS</string>
+    <string name="title_home">Home</string>
+    <string name="title_marks">Marks</string>
+    <string name="title_tasks">Tasks</string>
+
+    <string-array name="semesters_list">
+        <item>1 (1st year)</item>
+        <item>2 (1st year)</item>
+        <item>1 (2nd year)</item>
+        <item>2 (2nd year)</item>
+        <item>1 (3rd year)</item>
+        <item>2 (3rd year)</item>
+        <item>1 (4th year)</item>
+        <item>2 (4th year)</item>
+        <item>1 (5th year)</item>
+        <item>2 (5th year)</item>
+    </string-array>
+
+    <string-array name="mark_types_list">
+        <item>Class participation (September - October)</item>
+        <item>Class participation (November - December)</item>
+        <item>Online</item>
+        <item>Project (In-class sessions)</item>
+        <item>Project (Online assignments)</item>
+        <item>Midterm / Diagnostic</item>
+        <item>Final Test / IELTS</item>
+    </string-array>
+</resources>
