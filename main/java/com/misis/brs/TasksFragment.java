@@ -73,9 +73,11 @@ public class TasksFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Homework task = taskViewAdapter.tasks.elementAt(position);
+                // TODO: Show full version
+                Log.i("BRS", "Handling task click event");
                 // task.setCheck(!task.getCheck());
                 // ((MainActivity) getActivity()).databaseHandler.updateHometaskByDate(task.getDeadline(), task.getHometask(), task.getCheck());
-                taskViewAdapter.notifyDataSetChanged();
+                // taskViewAdapter.notifyDataSetChanged();
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
