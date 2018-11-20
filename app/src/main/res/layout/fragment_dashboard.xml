@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/semesters_list"
-        style="@style/spinnerStyle"/>
+        style="@style/Base.Widget.AppCompat.TextView.SpinnerItem"
+        android:spinnerMode="dialog"/>
 
 
     <TextView
@@ -23,7 +24,7 @@
         android:textStyle="bold|italic"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textColor="@android:color/black"
+        android:textColor="@color/lightcolor"
         android:textSize="64sp" />
 
 </FrameLayout>

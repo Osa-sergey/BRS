@@ -31,14 +31,16 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Mark type" />
+                        android:text="Mark type"
+                        style="@style/textViewStyle" />
 
                     <Spinner
                         android:id="@+id/create_mark_type"
+                        style="@style/Base.Widget.AppCompat.TextView.SpinnerItem"
+                        android:spinnerMode="dialog"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:entries="@array/mark_types_list"
-                        style="@style/spinnerStyle" />
+                        android:entries="@array/mark_types_list" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -54,12 +56,14 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                style="@style/textViewStyle"
                                 android:layout_marginRight="10dp"
                                 android:gravity="center"
                                 android:text="Mark" />
 
                             <NumberPicker
                                 android:id="@+id/create_mark_value"
+                                style="@style/numberPickerStyle"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>
@@ -72,13 +76,15 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginRight="10dp"
+                                style="@style/textViewStyle"
                                 android:gravity="center"
                                 android:text="Max mark" />
 
                             <NumberPicker
                                 android:id="@+id/create_mark_maximum"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                android:layout_height="wrap_content"
+                                style="@style/numberPickerStyle" />
                         </LinearLayout>
 
                     </LinearLayout>

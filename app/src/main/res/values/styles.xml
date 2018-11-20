@@ -12,12 +12,16 @@
         <item name="android:background">@drawable/button_shape</item>
         <item name="android:gravity">center|center_vertical</item>
         <item name="android:textStyle">bold|italic</item>
-        <item name="android:textColor">#FFF</item>
+        <item name="android:textColor">@color/background</item>
     </style>
 
-    <style name="spinnerStyle">
-        <item name="android:background">@android:drawable/btn_dropdown</item>
-        <item name="android:spinnerMode">dialog</item>
+    <style name="numberPickerStyle">
+        <item name="android:solidColor">@color/buttonColor</item>
+    </style>
+
+    <style name="textViewStyle">
+        <item name="android:textStyle">italic|bold</item>
+        <item name="android:textColor">@color/lightcolor</item>
     </style>
 
 </resources>
