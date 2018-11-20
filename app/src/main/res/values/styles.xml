@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="buttonStyle">
+        <item name="android:background">@drawable/button_shape</item>
+        <item name="android:gravity">center|center_vertical</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textColor">#FFF</item>
+    </style>
+
 </resources>
