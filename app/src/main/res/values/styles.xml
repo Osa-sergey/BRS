@@ -15,4 +15,9 @@
         <item name="android:textColor">#FFF</item>
     </style>
 
+    <style name="spinnerStyle">
+        <item name="android:background">@android:drawable/btn_dropdown</item>
+        <item name="android:spinnerMode">dialog</item>
+    </style>
+
 </resources>

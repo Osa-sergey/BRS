@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF"
+    android:background="@color/background"
     tools:context=".DashboardFragment">
 
     <Spinner
         android:id="@+id/semester_picker"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown"
-        android:entries="@array/semesters_list"/>
+        android:entries="@array/semesters_list"
+        style="@style/spinnerStyle"/>
+
 
     <TextView
         android:id="@+id/score_label"
@@ -20,6 +20,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="TOTAL:\n--/ --"
+        android:textStyle="bold|italic"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@android:color/black"
