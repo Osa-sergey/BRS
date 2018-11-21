@@ -17,11 +17,14 @@
 
     <style name="numberPickerStyle">
         <item name="android:solidColor">@color/buttonColor</item>
+        <item name="android:scaleY">0.7</item>
+        <item name="android:scaleX">0.7</item>
+        <item name="android:textSize">10dp</item>
     </style>
 
     <style name="textViewStyle">
         <item name="android:textStyle">italic|bold</item>
-        <item name="android:textColor">@color/lightcolor</item>
+        <item name="android:textColor">@color/lightСolor</item>
     </style>
 
 </resources>

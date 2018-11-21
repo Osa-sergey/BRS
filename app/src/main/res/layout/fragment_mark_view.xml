@@ -12,13 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/buttonColor"
+        android:background="@drawable/mark_shape"
         android:padding="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/buttonColor"
             android:orientation="horizontal">
 
             <TextView
@@ -26,6 +25,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textColor="@color/background"
+                android:textSize="13dp"
+                android:textStyle="bold"
                 android:layout_marginRight="10dp"/>
 
             <TextView

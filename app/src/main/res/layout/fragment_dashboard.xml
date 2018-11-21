@@ -24,7 +24,7 @@
         android:textStyle="bold|italic"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textColor="@color/lightcolor"
+        android:textColor="@color/lightСolor"
         android:textSize="64sp" />
 
 </FrameLayout>
