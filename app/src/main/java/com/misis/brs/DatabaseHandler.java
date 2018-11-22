@@ -215,7 +215,7 @@ public class DatabaseHandler {
             try {
                 String createHWTable = "CREATE TABLE IF NOT EXISTS " + TABLE_HW + "(" + COLUMN_DEADLINE + " INTEGER PRIMARY KEY, "
                         + COLUMN_SEMESTER + " INTEGER, " + COLUMN_HOMETASK + " TEXT, " + COLUMN_FINISHED + " BOOLEAN)";
-                String createMarksTable = "CREATE TABLE IF NOT EXISTS " + TABLE_M + "(" + COLUMN_ID + " INTEGER PRIMARY KEY, "
+                String createMarksTable = "CREATE TABLE IF NOT EXISTS " + TABLE_M + "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                         + COLUMN_TYPE + " INTEGER, " + COLUMN_DESCRIPTION + " TEXT, " + COLUMN_SEMESTER + " INTEGER, " + COLUMN_MARK
                         + " INTEGER, " + COLUMN_MAXMARK + " INTEGER)";
                 db.execSQL(createHWTable);
