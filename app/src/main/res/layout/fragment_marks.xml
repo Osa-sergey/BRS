@@ -109,6 +109,7 @@
         </ScrollView>
 
         <ListView
+            android:background="@color/background"
             android:id="@+id/marks_list"
             android:layout_width="match_parent"
             android:layout_height="fill_parent"

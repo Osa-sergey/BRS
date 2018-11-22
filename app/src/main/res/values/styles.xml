@@ -28,7 +28,7 @@
     </style>
 
     <style name="checkBoxStyle">
-        <item name="colorControlNormal">@android:color/check</item>
-        <item name="colorControlActivated">@android:color/check</item>
+        <item name="colorControlNormal">@color/check</item>
+        <item name="colorControlActivated">@color/check</item>
     </style>
 </resources>
