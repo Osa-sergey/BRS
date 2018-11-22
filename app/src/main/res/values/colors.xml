@@ -2,9 +2,13 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="buttonColor">#034AA6</color>
+    <color name="buttonColor">#386890</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="background">#FFF</color>
-    <color name="lightColor">#048ABF</color>
-    <color name="light">#05c5fa</color>
+    <color name="background">#dae6f0</color>
+    <color name="white">#FFF</color>
+    <color name="bottomMenu">#90b4d2</color>
+    <color name="textColor">#4682b4</color>
+    <color name="numberPickerColor">#3f75a2</color>
+    <color name="checkBoxBackground">#3f75a2</color>
+    <color name="check">#23415a</color>
 </resources>
