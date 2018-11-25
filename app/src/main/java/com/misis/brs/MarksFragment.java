@@ -78,7 +78,7 @@ public class MarksFragment extends Fragment {
                     final Snackbar notificationSnackbar = Snackbar.make(
                             view.findViewById(R.id.marks_fragment_view),
                             "Mark can not be higher than the maximum.",
-                            Snackbar.LENGTH_INDEFINITE
+                            Snackbar.LENGTH_SHORT
                     );
                     notificationSnackbar.show();
 
