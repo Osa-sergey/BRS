@@ -89,7 +89,7 @@ public class TasksFragment extends Fragment {
                 final Snackbar mySnackbar = Snackbar.make(
                         getView().findViewById(R.id.tasks_coordinator_layout),
                         "Delete the selected task",
-                        Snackbar.LENGTH_LONG
+                        Snackbar.LENGTH_SHORT
                 );
 
                 mySnackbar.addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {

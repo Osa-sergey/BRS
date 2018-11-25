@@ -40,7 +40,7 @@ public class DashboardFragment extends Fragment {
             editor.apply();
         }
 
-        final int semester = pref.getInt("semester", 0);
+        int semester = pref.getInt("semester", 0);
 
         final TextView scoreLabel = view.findViewById(R.id.score_label);
 
@@ -54,6 +54,7 @@ public class DashboardFragment extends Fragment {
                 editor.putInt("semester", position);
                 editor.apply();
 
+                int semester = pref.getInt("semester", 0);
                 updateScore(view, semester, scoreLabel);
             }
 

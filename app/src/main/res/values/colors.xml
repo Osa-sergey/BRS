@@ -11,4 +11,7 @@
     <color name="numberPickerColor">#3f75a2</color>
     <color name="checkBoxBackground">#3f75a2</color>
     <color name="check">#23415a</color>
+    <color name="checkedTaskLayout">#278236</color>
+    <color name="checkedTaskState">#349D38</color>
+    <color name="deleteTask">#B21D0A</color>
 </resources>

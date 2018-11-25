@@ -3,13 +3,13 @@ package com.misis.brs;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -66,7 +66,8 @@ public class TaskViewAdapter extends BaseAdapter {
         taskDeadline.setText(df.format(new Date(task.getDeadline())));
         final TextView taskDescription = view.findViewById(R.id.task_description);
         taskDescription.setText(task.getHometask());
-        CheckBox taskState = view.findViewById(R.id.task_completion_checkbox);
+        final CheckBox taskState = view.findViewById(R.id.task_completion_checkbox);
+        final LinearLayout taskLayout = view.findViewById(R.id.task_layout);
 
         started = true;
         taskState.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -80,10 +81,12 @@ public class TaskViewAdapter extends BaseAdapter {
                     taskDescription.setTextColor(Color.parseColor("#ffffff"));
                     view.getBackground().setColorFilter(Color.parseColor("#335599"), PorterDuff.Mode.DARKEN);
                 }
-                else if (task.getCheck()) {
+                else {
                     taskDeadline.setTextColor(Color.parseColor("#ffffff"));
                     // taskDescription.setPaintFlags(taskDescription.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                     taskDescription.setTextColor(Color.parseColor("#ffffff"));
+                    taskLayout.setBackgroundColor(context.getResources().getColor(R.color.checkedTaskLayout));
+                    taskState.setBackgroundColor(context.getResources().getColor(R.color.checkedTaskState));
                     view.getBackground().setColorFilter(Color.parseColor("#339955"), PorterDuff.Mode.DARKEN);
                 }
 
@@ -94,6 +97,14 @@ public class TaskViewAdapter extends BaseAdapter {
                 }
             }
         });
+
+        if (position == selectedTask) {
+            taskState.setBackgroundColor(context.getResources().getColor(R.color.deleteTask));
+            if (task.getCheck())
+                taskLayout.setBackground(context.getResources().getDrawable(R.drawable.gradient_checked_task));
+            else
+                taskLayout.setBackground(context.getResources().getDrawable(R.drawable.gradient_unchecked_task));
+        }
 
         taskState.setChecked(task.getCheck());
         started = false;
