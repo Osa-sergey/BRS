@@ -74,20 +74,9 @@ public class TaskViewAdapter extends BaseAdapter {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 task.setCheck(isChecked);
-
-                if (position == selectedTask)
-                {
-                    taskDeadline.setTextColor(Color.parseColor("#ffffff"));
-                    taskDescription.setTextColor(Color.parseColor("#ffffff"));
-                    view.getBackground().setColorFilter(Color.parseColor("#335599"), PorterDuff.Mode.DARKEN);
-                }
-                else {
-                    taskDeadline.setTextColor(Color.parseColor("#ffffff"));
-                    // taskDescription.setPaintFlags(taskDescription.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                    taskDescription.setTextColor(Color.parseColor("#ffffff"));
+                if (position != selectedTask){
                     taskLayout.setBackgroundColor(context.getResources().getColor(R.color.checkedTaskLayout));
                     taskState.setBackgroundColor(context.getResources().getColor(R.color.checkedTaskState));
-                    view.getBackground().setColorFilter(Color.parseColor("#339955"), PorterDuff.Mode.DARKEN);
                 }
 
                 if (!started)

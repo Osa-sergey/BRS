@@ -53,7 +53,7 @@ public class TaskCreationActivity extends AppCompatActivity {
             final Snackbar collisionResolvingSnackbar = Snackbar.make(
                     findViewById(R.id.task_creation_view),
                     "Task exists. Replace?",
-                    Snackbar.LENGTH_INDEFINITE
+                    Snackbar.LENGTH_SHORT
             );
 
             collisionResolvingSnackbar.setAction("YES", new View.OnClickListener() {
