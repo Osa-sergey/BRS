@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Switch;
 
 import java.util.Vector;
 
@@ -234,6 +235,33 @@ public class DatabaseHandler {
             } catch (SQLiteException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    protected Returns isAbleToAdd(Mark mark) {
+        Vector <Mark> ans = selectMark(mark.getSemester(), mark.getType());
+        switch (mark.getType()){
+            case 0://class part sep-oct
+            case 1:{//class part nov-dec
+                int sum = 0;
+                for (int i = 0; i < ans.size(); i++)
+                    sum += ans.elementAt(i).getMark();
+                if (sum + mark.getMark() > 20)
+                    return Returns.MARKS_SCORE_LIMIT;
+            }
+            case 2://online
+            case 3://project inclass
+            case 4:{//project online
+                if (ans.size() >= 4)
+                    return Returns.MARKS_TYPE_LIMIT;
+
+            }
+            case 5://midterm
+            case 6:{//final
+                if (!ans.isEmpty())
+                    return Returns.MARKS_TYPE_LIMIT;
+            }
+            default: return Returns.DONE;
         }
     }
 }
