@@ -147,6 +147,7 @@ public class DatabaseHandler {
     }
 
 
+
     public Vector<Mark> selectMark(Integer semester, Integer type) {
         Cursor cursor;
         String[] str = new String[]{COLUMN_ID + ", " + COLUMN_SEMESTER + ", " + COLUMN_TYPE + ", " + COLUMN_MARK + ", " + COLUMN_MAXMARK + ", " + COLUMN_DESCRIPTION};
