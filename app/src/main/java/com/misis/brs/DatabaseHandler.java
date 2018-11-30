@@ -249,10 +249,10 @@ public class DatabaseHandler {
                 if (sum + mark.getMark() > 20)
                     return Returns.MARKS_SCORE_LIMIT;
             }else if(mark.getType() == 2){
-                if (ans.size() > 4)
+                if (ans.size() >= 4)
                     return Returns.MARKS_TYPE_LIMIT;
             }else if(mark.getType() == 3 || mark.getType() == 4) {
-                if (ans.size() > 2)
+                if (ans.size() >= 2)
                     return Returns.MARKS_TYPE_LIMIT;
             }else if(mark.getType() == 5 || mark.getType() == 6) {
                 if (!ans.isEmpty())
