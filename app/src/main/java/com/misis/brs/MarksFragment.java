@@ -84,19 +84,37 @@ public class MarksFragment extends Fragment {
 
                     return;
                 }
-
-                if (db.addMark(new Mark(
+                Mark added = new Mark(
                         semester,
                         markTypeSpinner.getSelectedItemPosition(),
                         markValuePicker.getValue(),
                         markMaxPicker.getValue(),
-                        markDescriptionInput.getText().toString()
-                )) == Returns.DONE)
-                {
-                    markTypeSpinner.setSelection(0);
-                    markValuePicker.setValue(5);
-                    markMaxPicker.setValue(5);
-                    markDescriptionInput.setText("");
+                        markDescriptionInput.getText().toString());
+                Returns returned = db.isAbleToAdd(added);
+                if (returned == Returns.DONE){
+                    if (db.addMark(added) == Returns.DONE)
+                    {
+                        markTypeSpinner.setSelection(0);
+                        markValuePicker.setValue(5);
+                        markMaxPicker.setValue(5);
+                        markDescriptionInput.setText("");
+                    }
+                }else{
+                    if(returned == Returns.MARKS_SCORE_LIMIT){
+                        final Snackbar notificationSnackbar = Snackbar.make(
+                                view.findViewById(R.id.marks_fragment_view),
+                                "Limit for the number of points for this type of assessment.",
+                                Snackbar.LENGTH_LONG
+                        );
+                        notificationSnackbar.show();
+                    }else {
+                        final Snackbar notificationSnackbar = Snackbar.make(
+                                view.findViewById(R.id.marks_fragment_view),
+                                "Limit exceeded the number of evaluations of this type.",
+                                Snackbar.LENGTH_LONG
+                        );
+                        notificationSnackbar.show();
+                    }
                 }
                 loadMarks(db, semester, markViewAdapter);
             }
