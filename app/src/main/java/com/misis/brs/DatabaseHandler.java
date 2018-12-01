@@ -242,21 +242,29 @@ public class DatabaseHandler {
 
     protected Returns isAbleToAdd(Mark mark) {
         Vector <Mark> ans = selectMark(mark.getSemester(), mark.getType());
-            if(mark.getType() == 0 || mark.getType() == 1){
-                int sum = 0;
-                for (int i = 0; i < ans.size(); i++)
-                    sum += ans.elementAt(i).getMark();
-                if (sum + mark.getMark() > 20)
-                    return Returns.MARKS_SCORE_LIMIT;
-            }else if(mark.getType() == 2){
-                if (ans.size() > 4)
-                    return Returns.MARKS_TYPE_LIMIT;
-            }else if(mark.getType() == 3 || mark.getType() == 4) {
-                if (ans.size() > 2)
-                    return Returns.MARKS_TYPE_LIMIT;
-            }else if(mark.getType() == 5 || mark.getType() == 6) {
-                if (!ans.isEmpty())
-                    return Returns.MARKS_TYPE_LIMIT;
+            switch (mark.getType()){
+                case 0:
+                case 1:
+                    int sum = 0;
+                    for (int i = 0; i < ans.size(); i++)
+                        sum += ans.elementAt(i).getMark();
+                    if (sum + mark.getMark() > 20)
+                        return Returns.MARKS_SCORE_LIMIT;
+                    else break;
+                case 2:
+                    if (ans.size() >= 4)
+                        return Returns.MARKS_TYPE_LIMIT;
+                    else break;
+                case 3:
+                case 4:
+                    if (ans.size() >= 2)
+                        return Returns.MARKS_TYPE_LIMIT;
+                    else break;
+                case 5:
+                case 6:
+                    if (!ans.isEmpty())
+                        return Returns.MARKS_TYPE_LIMIT;
+                    else break;
             }
             return Returns.DONE;
         }

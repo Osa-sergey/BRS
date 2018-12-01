@@ -90,33 +90,37 @@ public class MarksFragment extends Fragment {
                         markValuePicker.getValue(),
                         markMaxPicker.getValue(),
                         markDescriptionInput.getText().toString());
+
                 Returns returned = db.isAbleToAdd(added);
-                if (returned == Returns.DONE){
-                    if (db.addMark(added) == Returns.DONE)
-                    {
-                        markTypeSpinner.setSelection(0);
-                        markValuePicker.setValue(5);
-                        markMaxPicker.setValue(5);
-                        markDescriptionInput.setText("");
-                    }
-                }else{
-                    if(returned == Returns.MARKS_SCORE_LIMIT){
-                        final Snackbar notificationSnackbar = Snackbar.make(
-                                view.findViewById(R.id.marks_fragment_view),
-                                "Limit for the number of points for this type of assessment.",
-                                Snackbar.LENGTH_LONG
-                        );
-                        notificationSnackbar.show();
-                    }else {
+                switch (returned){
+                    case DONE:
+                        if (db.addMark(added) == Returns.DONE)
+                        {
+                            markTypeSpinner.setSelection(0);
+                            markValuePicker.setValue(5);
+                            markMaxPicker.setValue(5);
+                            markDescriptionInput.setText("");
+                        }
+                        break;
+                    case MARKS_TYPE_LIMIT:
                         final Snackbar notificationSnackbar = Snackbar.make(
                                 view.findViewById(R.id.marks_fragment_view),
                                 "Limit exceeded the number of evaluations of this type.",
                                 Snackbar.LENGTH_LONG
                         );
                         notificationSnackbar.show();
-                    }
+                        break;
+                    case MARKS_SCORE_LIMIT:
+                        final Snackbar notificationSnackbar1 = Snackbar.make(
+                                view.findViewById(R.id.marks_fragment_view),
+                                "Limit for the number of points for this type of assessment.",
+                                Snackbar.LENGTH_LONG
+                        );
+                        notificationSnackbar1.show();
+                        break;
                 }
                 loadMarks(db, semester, markViewAdapter);
+
             }
         });
 
