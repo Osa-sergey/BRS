@@ -46,36 +46,41 @@ public class TaskCreationActivity extends AppCompatActivity {
 
     private void createTask(final DatabaseHandler databaseHandler, final Homework task)
     {
-        Returns ret = databaseHandler.addHometask(task);
-
-        if (ret == Returns.DUPLICAT)
-        {
-            final Snackbar collisionResolvingSnackbar = Snackbar.make(
+        if (task.getHometask().equals("")){
+            final Snackbar emptyHometaskResolvingSnackbar = Snackbar.make(
                     findViewById(R.id.task_creation_view),
-                    "Task exists. Replace?",
+                    "Task is empty. Please fill it and try again",
                     Snackbar.LENGTH_SHORT
             );
+            emptyHometaskResolvingSnackbar.show();
+        }
+        else {
+            Returns ret = databaseHandler.addHometask(task);
 
-            collisionResolvingSnackbar.setAction("YES", new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    updateTask(databaseHandler, task);
-                }
-            });
-            collisionResolvingSnackbar.show();
-        }
-        else if (ret == Returns.SQL_ERROR)
-        {
-            showRetrySnackbar(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    createTask(databaseHandler, task);
-                }
-            });
-        }
-        else
-        {
-            finish();
+            if (ret == Returns.DUPLICAT) {
+                final Snackbar collisionResolvingSnackbar = Snackbar.make(
+                        findViewById(R.id.task_creation_view),
+                        "Task exists. Replace?",
+                        Snackbar.LENGTH_SHORT
+                );
+
+                collisionResolvingSnackbar.setAction("YES", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        updateTask(databaseHandler, task);
+                    }
+                });
+                collisionResolvingSnackbar.show();
+            } else if (ret == Returns.SQL_ERROR) {
+                showRetrySnackbar(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        createTask(databaseHandler, task);
+                    }
+                });
+            } else {
+                finish();
+            }
         }
     }
 
