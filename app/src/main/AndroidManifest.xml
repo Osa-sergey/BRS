@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".TaskCreationActivity"></activity>
+        <activity android:name=".TaskViewDialog"></activity>
     </application>
 
 </manifest>

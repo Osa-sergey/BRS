@@ -8,14 +8,12 @@ import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.util.Arrays;
 import java.util.Vector;
 
 
@@ -29,10 +27,7 @@ public class TasksFragment extends Fragment {
 
 
     public TasksFragment() {
-        tasks = new Vector<>(Arrays.asList(
-                new Homework(0, Calendar.dateToMillis(2018, 10, 28), "This is a test task. Should display well.", false),
-                new Homework(0, Calendar.dateToMillis(2018, 10, 29), "Тестирую русский языкъ...\n Аз бука веди\nAHdj 3r jgjhsdg jskgd jegrug3wurgu ,wjdfhg sjdfgsjdhfgj4w 43 t34t sdjg skjt 43. T J932n92 9h o485y 283h283 yf8 6fdfg6 d8fg6 d8g npeo4tg l3p4u3o42iy 58235 uiyefh y43 rby3874h f38  4u38th4u5t u54h54i t845hu4g5bb 45 5  456 3 5v 3v6j3v63456v3456bvo5 6 g dfgdh 0fg8h!", false)
-        ));
+        tasks = new Vector<>();
     }
 
 
@@ -73,8 +68,14 @@ public class TasksFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Homework task = taskViewAdapter.tasks.elementAt(position);
-                // TODO: Show full version
-                Log.i("BRS", "Handling task click event");
+
+                Intent intent = new Intent(getActivity(), TaskViewDialog.class);
+                intent.putExtra("description", task.getHometask());
+                intent.putExtra("deadline", task.getDeadline());
+                intent.putExtra("is_done", task.getCheck());
+                intent.putExtra("semester", task.getSemester());
+                getActivity().startActivity(intent);
+
                 // task.setCheck(!task.getCheck());
                 // ((MainActivity) getActivity()).databaseHandler.updateHometaskByDate(task.getDeadline(), task.getHometask(), task.getCheck());
                 // taskViewAdapter.notifyDataSetChanged();

@@ -3,6 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_marks">Marks</string>
     <string name="title_tasks">Tasks</string>
+    <string name="close">Close</string>
+    <string name="edit">Edit</string>
 
     <string-array name="semesters_list">
         <item>1 (1st year)</item>
@@ -26,4 +28,8 @@
         <item>Midterm / Diagnostic</item>
         <item>Final Test / IELTS</item>
     </string-array>
+
+    <string name="task_description">Task description</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
 </resources>
