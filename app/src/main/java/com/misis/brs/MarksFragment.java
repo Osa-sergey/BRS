@@ -126,6 +126,7 @@ public class MarksFragment extends Fragment {
                         break;
                 }
                 loadMarks(db, semester, markViewAdapter);
+                ((ListView) view.findViewById(R.id.marks_list)).setAdapter(markViewAdapter);
             }
         });
 
