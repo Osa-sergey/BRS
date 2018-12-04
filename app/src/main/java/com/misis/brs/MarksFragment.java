@@ -1,13 +1,16 @@
 package com.misis.brs;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -22,8 +25,11 @@ import java.util.Vector;
  */
 public class MarksFragment extends Fragment {
 
+    private Vector<Mark> marks;
+    private MarkViewAdapter markViewAdapter;
 
     public MarksFragment() {
+        marks = new Vector<>();
         // Required empty public constructor
     }
 
@@ -120,11 +126,70 @@ public class MarksFragment extends Fragment {
                         break;
                 }
                 loadMarks(db, semester, markViewAdapter);
-
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
+        final int semester = pref.getInt("semester", 1);
+        final int type = pref.getInt("type", 0);
+
+        marks = ((MainActivity)getActivity()).databaseHandler.selectMark(semester, type);
+        if (marks == null) marks = new Vector<>();
+        markViewAdapter = new MarkViewAdapter(getContext(), marks);
+        ListView listView = getView().findViewById(R.id.marks_list);
+
+        //loadMarks(((MainActivity) getActivity()).databaseHandler, semester, markViewAdapter);
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                markViewAdapter.setSelectedMark(position);
+                markViewAdapter.notifyDataSetChanged();
+
+                final Snackbar mySnackbar = Snackbar.make(
+                        getView().findViewById(R.id.marks_list),
+                        "Delete the selected mark?",
+                        Snackbar.LENGTH_SHORT
+                );
+
+                mySnackbar.addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                    @Override
+                    public void onDismissed(Snackbar transientBottomBar, int event) {
+                        super.onDismissed(transientBottomBar, event);
+                        markViewAdapter.setSelectedMark(-1);
+                        markViewAdapter.notifyDataSetChanged();
+                    }
+                });
+
+                mySnackbar.setAction("YES", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ((MainActivity) getActivity()).databaseHandler.deleteMarkById(markViewAdapter.marks.elementAt(position).getId());
+
+                        /*for (int type = 0; type < 7; type++) {
+                            marks.addAll (((MainActivity) getActivity()).databaseHandler.selectMark(semester, type));
+                        }*/
+                        marks = (((MainActivity) getActivity()).databaseHandler.selectMark(semester, type));
+                        if (marks == null) marks = new Vector<>();
+                        markViewAdapter.marks = marks;
+                        markViewAdapter.notifyDataSetChanged();
+                    }
+                });
+
+                mySnackbar.show();
+                return true;
+            }
+        });
+
+        listView.setAdapter(markViewAdapter);
+
+
     }
 
     private void loadMarks(final DatabaseHandler databaseHandler, int semester, MarkViewAdapter markViewAdapter)
