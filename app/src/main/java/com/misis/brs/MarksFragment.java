@@ -82,6 +82,17 @@ public class MarksFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View itemSelected, int selectedItemPosition, long selectedId) {
                 String[] numsForMarkMaxPicker;
                 String[] numsForMarkValuePicker;
+
+                numsForMarkMaxPicker = new String[20];
+                for(int i=0; i < numsForMarkMaxPicker.length; i++)
+                    numsForMarkMaxPicker[i] = Integer.toString(i + 1);
+                numsForMarkValuePicker = new String[21];
+                for(int i=0; i < numsForMarkValuePicker.length; i++)
+                    numsForMarkValuePicker[i] = Integer.toString(i);
+                markMaxPicker.setDisplayedValues(numsForMarkMaxPicker);
+                markValuePicker.setDisplayedValues(numsForMarkValuePicker);
+                markDescriptionInput.setText("");
+
                 switch (selectedItemPosition){
                     case 0:
                     case 1:
@@ -188,8 +199,16 @@ public class MarksFragment extends Fragment {
                         if (db.addMark(added) == Returns.DONE)
                         {
                             markTypeSpinner.setSelection(0);
-                            markValuePicker.setValue(5);
-                            markMaxPicker.setValue(5);
+                            String[] numsForMarkMaxPicker;
+                            String[] numsForMarkValuePicker;
+                            numsForMarkMaxPicker = new String[20];
+                            for(int i=0; i < numsForMarkMaxPicker.length; i++)
+                                numsForMarkMaxPicker[i] = Integer.toString(i + 1);
+                            numsForMarkValuePicker = new String[21];
+                            for(int i=0; i < numsForMarkValuePicker.length; i++)
+                                numsForMarkValuePicker[i] = Integer.toString(i);
+                            markMaxPicker.setDisplayedValues(numsForMarkMaxPicker);
+                            markValuePicker.setDisplayedValues(numsForMarkValuePicker);
                             markDescriptionInput.setText("");
                         }
                         break;
