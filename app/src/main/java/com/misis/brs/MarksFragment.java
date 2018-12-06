@@ -104,8 +104,6 @@ public class MarksFragment extends Fragment {
                         markValuePicker.setDisplayedValues(numsForMarkValuePicker);
                         markValuePicker.setValue(5);
                         markValuePicker.setWrapSelectorWheel(false);
-                        ((ListView) view.findViewById(R.id.marks_list)).setAdapter(markViewAdapter);
-                        loadMarks(db, semester, markViewAdapter);
                         break;
                     case 2:
                     case 3:
@@ -128,8 +126,6 @@ public class MarksFragment extends Fragment {
                         markValuePicker.setDisplayedValues(numsForMarkValuePicker);
                         markValuePicker.setValue(5);
                         markValuePicker.setWrapSelectorWheel(false);
-                        ((ListView) view.findViewById(R.id.marks_list)).setAdapter(markViewAdapter);
-                        loadMarks(db, semester, markViewAdapter);
                         break;
                     case 5:
                     case 6:
@@ -151,10 +147,10 @@ public class MarksFragment extends Fragment {
                         markValuePicker.setDisplayedValues(numsForMarkValuePicker);
                         markValuePicker.setValue(5);
                         markValuePicker.setWrapSelectorWheel(false);
-                        ((ListView) view.findViewById(R.id.marks_list)).setAdapter(markViewAdapter);
-                        loadMarks(db, semester, markViewAdapter);
                         break;
                 }
+                ((ListView) view.findViewById(R.id.marks_list)).setAdapter(markViewAdapter);
+                loadMarks(db, semester, markViewAdapter);
             }
 
             @Override
@@ -176,12 +172,15 @@ public class MarksFragment extends Fragment {
 
                     return;
                 }
-                Mark added = new Mark(
-                        semester,
-                        markTypeSpinner.getSelectedItemPosition(),
-                        markValuePicker.getValue(),
-                        markMaxPicker.getValue(),
-                        markDescriptionInput.getText().toString());
+                MarkBuilder mb = new MarkBuilder();
+                mb.buildSemester(semester)
+                        .buildType( markTypeSpinner.getSelectedItemPosition())
+                        .buildDescription(markDescriptionInput.getText().toString())
+                        .buildMaxMark( markMaxPicker.getValue());
+                if( markTypeSpinner.getSelectedItemPosition() == 5 || markTypeSpinner.getSelectedItemPosition() == 6 )
+                    mb.buildMark(markValuePicker.getValue()*2);
+                else mb.buildMark(markValuePicker.getValue());
+                Mark added = mb.build();
 
                 Returns returned = db.isAbleToAdd(added);
                 switch (returned){
