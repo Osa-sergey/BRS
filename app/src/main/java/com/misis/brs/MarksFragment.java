@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.Vector;
 
@@ -75,6 +77,78 @@ public class MarksFragment extends Fragment {
         ((ListView) view.findViewById(R.id.marks_list)).setAdapter(markViewAdapter);
         loadMarks(db, semester, markViewAdapter);
 
+        markTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View itemSelected, int selectedItemPosition, long selectedId) {
+                String[] numsForMarkMaxPicker;
+                String[] numsForMarkValuePicker;
+                switch (selectedItemPosition){
+                    case 0:
+                    case 1:
+                        numsForMarkMaxPicker = new String[20];
+                        for(int i=0; i < numsForMarkMaxPicker.length; i++)
+                            numsForMarkMaxPicker[i] = Integer.toString(i + 1);
+
+                        markMaxPicker.setMinValue(1);
+                        markMaxPicker.setMaxValue(20);
+                        markMaxPicker.setDisplayedValues(numsForMarkMaxPicker);
+                        markMaxPicker.setValue(5);
+
+                        numsForMarkValuePicker = new String[21];
+                        for(int i=0; i < numsForMarkValuePicker.length; i++)
+                            numsForMarkValuePicker[i] = Integer.toString(i);
+
+                        markValuePicker.setMinValue(0);
+                        markValuePicker.setMaxValue(20);
+                        markValuePicker.setDisplayedValues(numsForMarkValuePicker);
+                        markValuePicker.setValue(5);
+                        break;
+                    case 2:
+                    case 3:
+                    case 4:
+                      //  Log.w("row", String.valueOf(selectedItemPosition));
+                        numsForMarkMaxPicker = new String[1];
+                        numsForMarkMaxPicker[0] = Integer.toString( 5);
+
+                        markMaxPicker.setMinValue(5);
+                        markMaxPicker.setMaxValue(5);
+                        markMaxPicker.setDisplayedValues(numsForMarkMaxPicker);
+                        markMaxPicker.setValue(5);
+
+                        numsForMarkValuePicker = new String[6];
+                        for(int i=0; i < numsForMarkValuePicker.length; i++)
+                            numsForMarkValuePicker[i] = Integer.toString(i);
+
+                        markValuePicker.setMinValue(0);
+                        markValuePicker.setMaxValue(5);
+                        markValuePicker.setDisplayedValues(numsForMarkValuePicker);
+                        markValuePicker.setValue(5);
+                        break;
+                    case 5:
+                    case 6:
+                        numsForMarkMaxPicker = new String[1];
+                        numsForMarkMaxPicker[0] = Integer.toString( 10);
+
+                        markMaxPicker.setMinValue(10);
+                        markMaxPicker.setMaxValue(10);
+                        markMaxPicker.setDisplayedValues(numsForMarkMaxPicker);
+                        markMaxPicker.setValue(10);
+
+                        numsForMarkValuePicker = new String[6];
+                        for(int i=0; i < numsForMarkValuePicker.length; i+=2)
+                            numsForMarkValuePicker[i] = Integer.toString(i);
+
+                        markValuePicker.setMinValue(0);
+                        markValuePicker.setMaxValue(10);
+                        markValuePicker.setDisplayedValues(numsForMarkValuePicker);
+                        markValuePicker.setValue(10);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
         Button createMarkButton = view.findViewById(R.id.create_mark_button);
         createMarkButton.setOnClickListener(new View.OnClickListener() {
             @Override
