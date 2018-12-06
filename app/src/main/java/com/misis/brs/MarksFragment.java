@@ -93,6 +93,7 @@ public class MarksFragment extends Fragment {
                         markMaxPicker.setMaxValue(20);
                         markMaxPicker.setDisplayedValues(numsForMarkMaxPicker);
                         markMaxPicker.setValue(5);
+                        markMaxPicker.setWrapSelectorWheel(false);
 
                         numsForMarkValuePicker = new String[21];
                         for(int i=0; i < numsForMarkValuePicker.length; i++)
@@ -102,11 +103,13 @@ public class MarksFragment extends Fragment {
                         markValuePicker.setMaxValue(20);
                         markValuePicker.setDisplayedValues(numsForMarkValuePicker);
                         markValuePicker.setValue(5);
+                        markValuePicker.setWrapSelectorWheel(false);
+                        ((ListView) view.findViewById(R.id.marks_list)).setAdapter(markViewAdapter);
+                        loadMarks(db, semester, markViewAdapter);
                         break;
                     case 2:
                     case 3:
                     case 4:
-                      //  Log.w("row", String.valueOf(selectedItemPosition));
                         numsForMarkMaxPicker = new String[1];
                         numsForMarkMaxPicker[0] = Integer.toString( 5);
 
@@ -114,6 +117,7 @@ public class MarksFragment extends Fragment {
                         markMaxPicker.setMaxValue(5);
                         markMaxPicker.setDisplayedValues(numsForMarkMaxPicker);
                         markMaxPicker.setValue(5);
+                        markMaxPicker.setWrapSelectorWheel(false);
 
                         numsForMarkValuePicker = new String[6];
                         for(int i=0; i < numsForMarkValuePicker.length; i++)
@@ -123,6 +127,9 @@ public class MarksFragment extends Fragment {
                         markValuePicker.setMaxValue(5);
                         markValuePicker.setDisplayedValues(numsForMarkValuePicker);
                         markValuePicker.setValue(5);
+                        markValuePicker.setWrapSelectorWheel(false);
+                        ((ListView) view.findViewById(R.id.marks_list)).setAdapter(markViewAdapter);
+                        loadMarks(db, semester, markViewAdapter);
                         break;
                     case 5:
                     case 6:
@@ -133,15 +140,20 @@ public class MarksFragment extends Fragment {
                         markMaxPicker.setMaxValue(10);
                         markMaxPicker.setDisplayedValues(numsForMarkMaxPicker);
                         markMaxPicker.setValue(10);
+                        markMaxPicker.setWrapSelectorWheel(false);
 
                         numsForMarkValuePicker = new String[6];
-                        for(int i=0; i < numsForMarkValuePicker.length; i+=2)
-                            numsForMarkValuePicker[i] = Integer.toString(i);
+                        for(int i=0; i < numsForMarkValuePicker.length; i++)
+                            numsForMarkValuePicker[i] = Integer.toString(i*2);
 
                         markValuePicker.setMinValue(0);
-                        markValuePicker.setMaxValue(10);
+                        markValuePicker.setMaxValue(5);
                         markValuePicker.setDisplayedValues(numsForMarkValuePicker);
-                        markValuePicker.setValue(10);
+                        markValuePicker.setValue(5);
+                        markValuePicker.setWrapSelectorWheel(false);
+                        ((ListView) view.findViewById(R.id.marks_list)).setAdapter(markViewAdapter);
+                        loadMarks(db, semester, markViewAdapter);
+                        break;
                 }
             }
 
