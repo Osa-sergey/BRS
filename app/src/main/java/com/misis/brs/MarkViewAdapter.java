@@ -13,7 +13,7 @@ public class MarkViewAdapter extends BaseAdapter {
 
     private Context context;
     private int selectedMark = -1;
-    public Vector<Mark> marks;
+    public static Vector<Mark> marks;
 
     public MarkViewAdapter(Context context, Vector<Mark> marks)
     {
