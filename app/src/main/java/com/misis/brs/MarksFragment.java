@@ -1,7 +1,6 @@
 package com.misis.brs;
 
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.BaseTransientBottomBar;
@@ -17,7 +16,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.util.Vector;
 
@@ -29,16 +27,16 @@ public class MarksFragment extends Fragment {
 
     private Vector<Mark> marks;
     private MarkViewAdapter markViewAdapter;
+    private DatabaseHandler db;
 
     public MarksFragment() {
-        marks = new Vector<>();
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("MarksFragmentDebug", "onCreateView");
         final View view = inflater.inflate(R.layout.fragment_marks, container, false);
 
         final NumberPicker markMaxPicker = view.findViewById(R.id.create_mark_maximum);
@@ -64,18 +62,15 @@ public class MarksFragment extends Fragment {
         markValuePicker.setDisplayedValues(numsForMarkValuePicker);
         markValuePicker.setValue(5);
 
-
         final Spinner markTypeSpinner = view.findViewById(R.id.create_mark_type);
         final EditText markDescriptionInput = view.findViewById(R.id.create_mark_description);
-
 
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
         final int semester = pref.getInt("semester", 0);
 
-        final DatabaseHandler db = ((MainActivity) getActivity()).databaseHandler;
-        final MarkViewAdapter markViewAdapter = new MarkViewAdapter(getActivity(), new Vector<Mark>());
+        db = ((MainActivity) getActivity()).databaseHandler;
+        markViewAdapter = new MarkViewAdapter(getActivity(), new Vector<Mark>());
         ((ListView) view.findViewById(R.id.marks_list)).setAdapter(markViewAdapter);
-        loadMarks(db, semester, markViewAdapter);
 
         markTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -160,7 +155,8 @@ public class MarksFragment extends Fragment {
                         markValuePicker.setWrapSelectorWheel(false);
                         break;
                 }
-                //((ListView) view.findViewById(R.id.marks_list)).setAdapter(markViewAdapter);
+
+                Log.d("MarksFragmentDebug", "loadMarks_InSelectSemester");
                 loadMarks(db, semester, markViewAdapter);
             }
 
@@ -229,8 +225,9 @@ public class MarksFragment extends Fragment {
                         notificationSnackbar1.show();
                         break;
                 }
+
+                Log.d("MarksFragmentDebug", "loadMarks_InCreateMark");
                 loadMarks(db, semester, markViewAdapter);
-                //((ListView) view.findViewById(R.id.marks_list)).setAdapter(markViewAdapter);
             }
         });
 
@@ -240,16 +237,14 @@ public class MarksFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
+        Log.d("MarksFragmentDebug", "onResume");
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("Prefs", 0);
         final int semester = pref.getInt("semester", 1);
-        final int type = pref.getInt("type", 0);
+//Never used now        final int type = pref.getInt("type", 0);
 
-        marks = ((MainActivity)getActivity()).databaseHandler.selectMark(semester, type);
-        if (marks == null) marks = new Vector<>();
-        markViewAdapter = new MarkViewAdapter(getContext(), marks);
         ListView listView = getView().findViewById(R.id.marks_list);
-
-        //loadMarks(((MainActivity) getActivity()).databaseHandler, semester, markViewAdapter);
+        Log.d("MarksFragmentDebug", "loadMarks_InResume");
+        loadMarks(db, semester, markViewAdapter);
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -272,18 +267,12 @@ public class MarksFragment extends Fragment {
                     }
                 });
 
-
                 mySnackbar.setAction("YES", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         ((MainActivity) getActivity()).databaseHandler.deleteMarkById(markViewAdapter.marks.elementAt(position).getId());
-
-                        /*for (int type = 0; type < 7; type++) {
-                            marks.addAll (((MainActivity) getActivity()).databaseHandler.selectMark(semester, type));
-                        }*/
-                        marks = (((MainActivity) getActivity()).databaseHandler.selectMark(semester, type));
-                        if (marks == null) marks = new Vector<>();
-                        markViewAdapter.marks = marks;
+                        Log.d("MarksFragmentDebug", "loadMarks_InDeleteMethod");
+                        loadMarks(db, semester, markViewAdapter);
                         markViewAdapter.notifyDataSetChanged();
                     }
                 });
@@ -293,20 +282,25 @@ public class MarksFragment extends Fragment {
             }
         });
 
-        listView.setAdapter(markViewAdapter);
+    }
 
-
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d("MarksFragmentDebug", "onDetach");
+        Log.d("MarksFragmentDebug", " ");
     }
 
     private void loadMarks(final DatabaseHandler databaseHandler, int semester, MarkViewAdapter markViewAdapter)
     {
-        Vector<Mark> marks = new Vector<>();
+        marks = new Vector<>();
         for (int type = 0; type < 7; ++type)
             marks.addAll(databaseHandler.selectMark(semester, type));
 
         markViewAdapter.marks = marks;
 
         markViewAdapter.notifyDataSetChanged();
+        Log.d("MarksFragmentDebug", "loadMarks_successfully");
     }
 
 }
