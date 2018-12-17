@@ -1,6 +1,5 @@
 package com.misis.brs;
 
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import java.util.Locale;
 import java.util.Vector;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -23,7 +21,6 @@ public class DashboardFragment extends Fragment {
     public DashboardFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

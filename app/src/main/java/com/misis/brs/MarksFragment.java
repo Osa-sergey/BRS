@@ -1,6 +1,5 @@
 package com.misis.brs;
 
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.BaseTransientBottomBar;
@@ -11,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -18,7 +18,6 @@ import android.widget.NumberPicker;
 import android.widget.Spinner;
 
 import java.util.Vector;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,6 +70,17 @@ public class MarksFragment extends Fragment {
         db = ((MainActivity) getActivity()).databaseHandler;
         markViewAdapter = new MarkViewAdapter(getActivity(), new Vector<Mark>());
         ((ListView) view.findViewById(R.id.marks_list)).setAdapter(markViewAdapter);
+
+
+        final Spinner spinner = (Spinner) view.findViewById(R.id.create_mark_type);
+        int markTypes = R.array.mark_types_list_odd;
+        if (semester % 2 != 0) {
+            markTypes = R.array.mark_types_list_even;
+        }
+        ArrayAdapter<?> adapter =
+                ArrayAdapter.createFromResource(getActivity(), markTypes, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         markTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

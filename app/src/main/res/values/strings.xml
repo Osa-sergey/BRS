@@ -19,9 +19,19 @@
         <item>2 (5th year)</item>
     </string-array>
 
-    <string-array name="mark_types_list">
-        <item>Class participation (September - October)</item>
-        <item>Class participation (November - December)</item>
+    <string-array name="mark_types_list_odd">
+        <item>Class participation (Sept - Oct)</item>
+        <item>Class participation (Nov - Dec)</item>
+        <item>Online</item>
+        <item>Project (In-class sessions)</item>
+        <item>Project (Online assignments)</item>
+        <item>Midterm / Diagnostic</item>
+        <item>Final Test / IELTS</item>
+    </string-array>
+
+    <string-array name="mark_types_list_even">
+        <item>Class participation (Feb - Mar)</item>
+        <item>Class participation (Apr - May)</item>
         <item>Online</item>
         <item>Project (In-class sessions)</item>
         <item>Project (Online assignments)</item>
