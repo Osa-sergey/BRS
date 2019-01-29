@@ -256,7 +256,7 @@ public class DatabaseHandler {
                     else break;
                 case 3:
                 case 4:
-                    if (ans.size() >= 2)
+                    if (!ans.isEmpty())
                         return Returns.MARKS_TYPE_LIMIT;
                     else break;
                 case 5:
